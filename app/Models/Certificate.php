@@ -6,5 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Certificate extends Model
 {
-    //
+    protected $fillable = [
+    'title',
+    'issuer',
+    'issue_date',
+    'credential_url',
+    'certificate_file',
+    'image',
+];
 }
