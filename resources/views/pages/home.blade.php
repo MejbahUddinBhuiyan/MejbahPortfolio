@@ -62,7 +62,7 @@
     </header>
 
     {{-- Hero --}}
-    <main id="home" class="relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-4 pb-16 pt-32 sm:px-6 lg:pt-28">
+    <main id="home" class="relative z-10 mx-auto flex max-w-7xl items-center px-4 pb-10 pt-36 sm:px-6 lg:min-h-[760px] lg:pt-36">
         <div class="grid w-full items-center gap-16 lg:grid-cols-2 lg:gap-12">
             <div class="text-center lg:text-left">
                 <div class="mb-6 inline-flex items-center gap-3 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-4 py-3 text-xs font-medium text-emerald-300 sm:px-5 sm:text-sm">
@@ -101,31 +101,9 @@
                         View Projects
                     </a>
                 </div>
-
-                <div class="mt-8 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:justify-center lg:justify-start">
-                    @php
-                        $socials = [
-                            ['label' => 'GitHub', 'url' => 'https://github.com/MejbahUddinBhuiyan'],
-                            ['label' => 'LinkedIn', 'url' => 'https://www.linkedin.com/in/mejbah-uddin-bhuiyan-79b9b6249/'],
-                            ['label' => 'ResearchGate', 'url' => 'https://www.researchgate.net/profile/Mejbah-Bhuiyan-2'],
-                            ['label' => 'Codeforces', 'url' => 'https://codeforces.com/profile/mejbah09'],
-                            ['label' => 'LeetCode', 'url' => 'https://leetcode.com/u/mejbah09/'],
-                            ['label' => 'HackerRank', 'url' => 'https://www.hackerrank.com/profile/mejbahu475'],
-                            ['label' => 'Facebook', 'url' => 'https://www.facebook.com/Mejbah.Moushom666/'],
-                            ['label' => 'Instagram', 'url' => 'https://www.instagram.com/__wiz_zard__/'],
-                        ];
-                    @endphp
-
-                    @foreach ($socials as $social)
-                        <a href="{{ $social['url'] }}" target="_blank"
-                           class="glass-card rounded-2xl px-3 py-3 text-center text-xs font-semibold text-slate-300 transition hover:-translate-y-1 hover:border-sky-400/50 hover:text-sky-400 sm:px-4 sm:text-sm">
-                            {{ $social['label'] }}
-                        </a>
-                    @endforeach
-                </div>
             </div>
 
-           <div class="relative order-first mx-auto w-full max-w-md lg:order-none lg:mx-0 lg:max-w-none lg:-mt-[15.5rem]">
+           <div class="relative order-first mx-auto w-full max-w-md lg:order-none lg:mx-0 lg:max-w-none lg:-mt-[9.5rem]">
                 <div class="glass-card rounded-[2rem] p-4 sm:p-6">
                     <div class="rounded-[1.5rem] border border-white/10 bg-gradient-to-br from-sky-400/20 to-violet-500/20 p-6 sm:p-8">
                         <div class="mx-auto flex h-56 w-56 items-center justify-center rounded-full border border-white/10 bg-white/10 text-center backdrop-blur-xl sm:h-72 sm:w-72">
@@ -158,7 +136,118 @@
             </div>
         </div>
     </main>
+{{-- Education Section --}}
+<section id="education" class="relative z-10 pb-16 pt-8 lg:pb-20 lg:pt-10">
+    <div class="mx-auto max-w-7xl px-6">
 
+        <div class="mb-12 text-center">
+            <span class="rounded-full border border-sky-400/20 bg-sky-400/10 px-4 py-2 text-sm font-medium text-sky-300">
+                Academic Background
+            </span>
+
+            <h2 class="mt-6 text-4xl font-bold text-white md:text-5xl">
+                Education
+            </h2>
+
+            <p class="mx-auto mt-4 max-w-2xl text-slate-400">
+                My academic journey and educational achievements.
+            </p>
+        </div>
+
+<div class="relative mx-auto max-w-5xl">
+
+    <div class="absolute left-4 top-0 h-full w-px bg-gradient-to-b from-sky-400 via-violet-500 to-transparent md:left-1/2"></div>
+
+    @forelse($educations as $index => $education)
+
+        <div class="relative mb-10
+            {{ $index % 2 == 0
+                ? 'pl-10 md:w-1/2 md:pl-0 md:pr-10'
+                : 'pl-10 md:ml-auto md:w-1/2 md:pl-10'
+            }}">
+
+            <div class="glass-card rounded-3xl p-6">
+
+                <span class="text-sm {{ $index % 2 == 0 ? 'text-sky-400' : 'text-violet-400' }}">
+                    {{ $education->year }}
+                </span>
+
+                <h3 class="mt-2 text-2xl font-bold text-white">
+                    {{ $education->degree }}
+                </h3>
+
+                <p class="mt-2 text-slate-300">
+                    {{ $education->institution }}
+                </p>
+
+                @if($education->description)
+                    <p class="mt-4 text-slate-400">
+                        {{ $education->description }}
+                    </p>
+                @endif
+
+            </div>
+
+            <div class="absolute left-2 top-8 h-4 w-4 rounded-full
+                {{ $index % 2 == 0
+                    ? 'bg-sky-400 shadow-lg shadow-sky-400/50 md:left-auto md:right-[-8px]'
+                    : 'bg-violet-400 shadow-lg shadow-violet-400/50 md:left-[-8px]'
+                }}">
+            </div>
+
+        </div>
+
+    @empty
+
+        <div class="text-center text-slate-500">
+            No education records found.
+        </div>
+
+    @endforelse
+
+</div>
+
+    </div>
+</section>
+
+{{-- Social Media Section --}}
+<section id="social" class="relative z-10 pb-20 pt-8">
+    <div class="mx-auto max-w-7xl px-6">
+
+        <div class="mb-10 text-center">
+            <span class="rounded-full border border-sky-400/20 bg-sky-400/10 px-4 py-2 text-sm font-medium text-sky-300">
+                Connect With Me
+            </span>
+
+            <h2 class="mt-6 text-4xl font-bold text-white md:text-5xl">
+                Social Platforms
+            </h2>
+        </div>
+
+        <div class="mx-auto grid max-w-5xl grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+            @php
+                $socials = [
+                    ['label' => 'GitHub', 'url' => 'https://github.com/MejbahUddinBhuiyan'],
+                    ['label' => 'LinkedIn', 'url' => 'https://www.linkedin.com/in/mejbah-uddin-bhuiyan-79b9b6249/'],
+                    ['label' => 'ResearchGate', 'url' => 'https://www.researchgate.net/profile/Mejbah-Bhuiyan-2'],
+                    ['label' => 'Codeforces', 'url' => 'https://codeforces.com/profile/mejbah09'],
+                    ['label' => 'LeetCode', 'url' => 'https://leetcode.com/u/mejbah09/'],
+                    ['label' => 'HackerRank', 'url' => 'https://www.hackerrank.com/profile/mejbahu475'],
+                    ['label' => 'Facebook', 'url' => 'https://www.facebook.com/Mejbah.Moushom666/'],
+                    ['label' => 'Instagram', 'url' => 'https://www.instagram.com/__wiz_zard__/'],
+                ];
+            @endphp
+
+            @foreach ($socials as $social)
+                <a href="{{ $social['url'] }}" target="_blank"
+                   class="glass-card rounded-2xl px-5 py-4 text-center text-sm font-semibold text-slate-300 transition hover:-translate-y-1 hover:border-sky-400/50 hover:text-sky-400">
+                    {{ $social['label'] }}
+                </a>
+            @endforeach
+        </div>
+
+    </div>
+</section>
     {{-- Footer --}}
     <footer class="relative z-10 border-t border-white/10 bg-slate-950/50 backdrop-blur-xl">
         <div class="mx-auto max-w-7xl px-6 py-8">
