@@ -71,7 +71,12 @@
                         <span class="relative inline-flex h-3 w-3 rounded-full bg-emerald-400"></span>
                     </span>
 
-                    <span>Available for Research & Software Projects</span>
+                    <span>@if ($profile?->is_available)
+                             Available for Research & Software Projects
+                          @else
+                             Currently Not Available
+                          @endif
+                    </span>
                 </div>
 
                 <p class="mb-4 text-base text-slate-400 sm:text-lg">Hello, I'm</p>
@@ -82,12 +87,13 @@
                 </h1>
 
                 <p class="mx-auto mt-6 max-w-2xl text-base leading-8 text-slate-400 sm:text-lg lg:mx-0">
-                    Computer Science and Engineering undergraduate, student researcher,
-                    Laravel developer, AI/ML enthusiast, and programming problem solver.
+                   {{ $profile->bio ?? 'Computer Science and Engineering undergraduate, student researcher, Laravel developer, AI/ML enthusiast, and programming problem solver.' }}
                 </p>
 
                 <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start">
-                    <a href="#" class="rounded-full bg-sky-400 px-6 py-3 text-center font-semibold text-slate-950 shadow-lg shadow-sky-400/20 transition hover:-translate-y-1 hover:bg-sky-300">
+                    <a href="{{ $profile?->cv_file ? asset('storage/' . $profile->cv_file) : '#' }}"
+                       target="{{ $profile?->cv_file ? '_blank' : '_self' }}"
+                       class="rounded-full bg-sky-400 px-6 py-3 text-center font-semibold text-slate-950 shadow-lg shadow-sky-400/20 transition hover:-translate-y-1 hover:bg-sky-300">
                         Download CV
                     </a>
 
@@ -124,9 +130,17 @@
                     <div class="rounded-[1.5rem] border border-white/10 bg-gradient-to-br from-sky-400/20 to-violet-500/20 p-6 sm:p-8">
                         <div class="mx-auto flex h-56 w-56 items-center justify-center rounded-full border border-white/10 bg-white/10 text-center backdrop-blur-xl sm:h-72 sm:w-72">
                             <div>
-                                <i data-lucide="user" class="mx-auto mb-4 h-12 w-12 text-sky-300 sm:h-16 sm:w-16"></i>
-                                <p class="font-display text-xl font-bold sm:text-2xl">Profile Image</p>
-                                <p class="mt-2 text-xs text-slate-400 sm:text-sm">We will add your photo here</p>
+                                @if ($profile?->profile_image)
+                                <img src="{{ asset('storage/' . $profile->profile_image) }}"
+                                     alt="Mejbah Uddin Bhuiyan"
+                                     class="h-full w-full rounded-full object-cover">
+                                @else
+                                    <div>
+                                        <i data-lucide="user" class="mx-auto mb-4 h-12 w-12 text-sky-300 sm:h-16 sm:w-16"></i>
+                                        <p class="font-display text-xl font-bold sm:text-2xl">Profile Image</p>
+                                        <p class="mt-2 text-xs text-slate-400 sm:text-sm">We will add your photo here</p>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
