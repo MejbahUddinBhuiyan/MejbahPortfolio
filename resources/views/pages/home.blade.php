@@ -137,6 +137,82 @@
             </div>
         </div>
     </main>
+{{-- About Section --}}
+<section id="about" class="relative z-10 pb-16 pt-8 lg:pb-20 lg:pt-10">
+    <div class="mx-auto max-w-7xl px-6">
+
+        <div class="mb-12 text-center">
+            <span class="rounded-full border border-sky-400/20 bg-sky-400/10 px-4 py-2 text-sm font-medium text-sky-300">
+                About Me
+            </span>
+
+            <h2 class="mt-6 text-4xl font-bold text-white md:text-5xl">
+                {{ $about->heading ?? 'About Me' }}
+            </h2>
+
+            <p class="mx-auto mt-4 max-w-2xl text-slate-400">
+                A brief overview of my academic, research and development journey.
+            </p>
+        </div>
+
+        <div class="grid items-center gap-10 lg:grid-cols-2">
+            <div class="glass-card rounded-[2rem] p-4 sm:p-6">
+                <div class="rounded-[1.5rem] border border-white/10 bg-gradient-to-br from-sky-400/20 to-violet-500/20 p-6 sm:p-8">
+                    @if ($about?->photo)
+                        <img src="{{ asset('storage/' . $about->photo) }}"
+                             alt="About Mejbah"
+                             class="h-80 w-full rounded-[1.5rem] object-cover">
+                    @else
+                        <div class="flex h-80 items-center justify-center rounded-[1.5rem] bg-white/10 text-center">
+                            <div>
+                                <i data-lucide="user-round" class="mx-auto mb-4 h-14 w-14 text-sky-300"></i>
+                                <p class="text-xl font-bold text-white">About Photo</p>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            </div>
+
+            <div>
+                <p class="text-lg leading-8 text-slate-400">
+                    {{ $about->description ?? 'Computer Science and Engineering undergraduate with interest in Laravel, AI, research, web development and problem solving.' }}
+                </p>
+
+                <div class="mt-8 grid gap-4 sm:grid-cols-3">
+                    <div class="glass-card rounded-2xl p-5 text-center">
+                        <p class="text-3xl font-bold text-sky-400">
+                            {{ $about->experience ?? '2+' }}
+                        </p>
+                        <p class="mt-2 text-sm text-slate-400">Experience</p>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-5 text-center">
+                        <p class="text-3xl font-bold text-sky-400">
+                            {{ $about->projects_completed ?? '15+' }}
+                        </p>
+                        <p class="mt-2 text-sm text-slate-400">Projects</p>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-5 text-center">
+                        <p class="text-lg font-bold text-sky-400">
+                            {{ $about->research_interest ?? 'AI, ML, Web' }}
+                        </p>
+                        <p class="mt-2 text-sm text-slate-400">Research Interest</p>
+                    </div>
+                </div>
+
+                @if ($about?->resume)
+                    <a href="{{ asset('storage/' . $about->resume) }}"
+                       target="_blank"
+                       class="mt-8 inline-flex rounded-full bg-sky-400 px-6 py-3 font-semibold text-slate-950 shadow-lg shadow-sky-400/20 transition hover:-translate-y-1 hover:bg-sky-300">
+                        Download Resume
+                    </a>
+                @endif
+            </div>
+        </div>
+
+    </div>
+</section>    
 {{-- Education Section --}}
 <section id="education" class="relative z-10 pb-16 pt-8 lg:pb-20 lg:pt-10">
     <div class="mx-auto max-w-7xl px-6">
