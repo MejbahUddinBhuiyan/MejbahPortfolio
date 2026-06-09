@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\EducationController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\ResearchController;
 use App\Models\Profile;
 use App\Models\Education;
 use App\Models\About;
@@ -80,6 +81,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/administrator/projects/sync-github', [ProjectController::class, 'syncGithub'])
         ->name('admin.projects.syncGithub');      
+    Route::resource('/administrator/research', ResearchController::class)
+        ->names('admin.research');    
 });
 
 require __DIR__.'/auth.php';

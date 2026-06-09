@@ -44,6 +44,11 @@
                    {{ request()->routeIs('admin.projects.*') ? 'bg-slate-800 text-sky-400' : '' }}">
                     Projects
                 </a>
+                <a href="{{ route('admin.research.index') }}"
+                   class="block rounded-lg px-4 py-2 hover:bg-slate-800
+                   {{ request()->routeIs('admin.research.*') ? 'bg-slate-800 text-sky-400' : '' }}">
+                    Research
+                </a>
 
                 <a href="#" class="block rounded-lg px-4 py-2 hover:bg-slate-800">
                     Publications
