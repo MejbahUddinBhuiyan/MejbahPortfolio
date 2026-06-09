@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SkillController;
 use App\Models\Profile;
 use App\Models\Education;
 use App\Models\About;
+use App\Models\Skill;
 use Illuminate\Support\Facades\Route;
 
 
@@ -21,10 +22,14 @@ Route::get('/', function () {
         ->latest()
         ->get();
 
+    $skills = Skill::orderBy('sort_order')
+        ->get();
+
     return view('pages.home', compact(
         'profile',
         'about',
-        'educations'
+        'educations',
+        'skills'
     ));
 });
 

@@ -289,7 +289,65 @@
 
     </div>
 </section>
+{{-- Skills Section --}}
+<section id="skills" class="relative z-10 pb-16 pt-2 lg:pb-20 lg:pt-4">
+    <div class="mx-auto max-w-7xl px-6">
 
+        <div class="mb-12 text-center">
+            <span class="rounded-full border border-sky-400/20 bg-sky-400/10 px-4 py-2 text-sm font-medium text-sky-300">
+                Technical Expertise
+            </span>
+
+            <h2 class="mt-6 text-4xl font-bold text-white md:text-5xl">
+                Skills
+            </h2>
+
+            <p class="mx-auto mt-4 max-w-2xl text-slate-400">
+                Technologies, programming languages and tools I work with.
+            </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+            @forelse($skills as $skill)
+
+                <div class="glass-card rounded-3xl p-6">
+
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xl font-bold text-white">
+                            {{ $skill->name }}
+                        </h3>
+
+                        <span class="text-sm font-semibold text-sky-400">
+                            {{ $skill->percentage }}%
+                        </span>
+                    </div>
+
+                    <p class="mt-2 text-sm text-slate-400">
+                        {{ $skill->category }}
+                    </p>
+
+                    <div class="mt-5 h-3 overflow-hidden rounded-full bg-white/10">
+                        <div
+                            class="h-full rounded-full bg-gradient-to-r from-sky-400 to-violet-500"
+                            style="width: {{ $skill->percentage }}%">
+                        </div>
+                    </div>
+
+                </div>
+
+            @empty
+
+                <div class="col-span-full text-center text-slate-500">
+                    No skills available.
+                </div>
+
+            @endforelse
+
+        </div>
+
+    </div>
+</section>
 {{-- Social Media Section --}}
 <section id="social" class="relative z-10 pb-20 pt-8">
     <div class="mx-auto max-w-7xl px-6">
