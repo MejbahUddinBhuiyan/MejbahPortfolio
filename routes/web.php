@@ -4,10 +4,12 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\EducationController;
 use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\SkillController;
 use App\Models\Profile;
 use App\Models\Education;
 use App\Models\About;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
 
@@ -59,6 +61,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
+    Route::resource('/administrator/skills', SkillController::class)
+        ->names('admin.skills');    
 });
 
 require __DIR__.'/auth.php';

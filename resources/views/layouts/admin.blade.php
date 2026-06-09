@@ -34,7 +34,8 @@
                     Education
                 </a>
 
-                <a href="#" class="block rounded-lg px-4 py-2 hover:bg-slate-800">
+                <a href="{{ route('admin.skills.index') }}"
+                class="block rounded-lg px-4 py-2 hover:bg-slate-800">
                     Skills
                 </a>
 

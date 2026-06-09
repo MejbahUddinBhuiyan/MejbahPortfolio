@@ -19,6 +19,7 @@
                 <a href="#home" class="transition hover:text-sky-400">Home</a>
                 <a href="#about" class="transition hover:text-sky-400">About</a>
                 <a href="#education" class="transition hover:text-sky-400">Education</a>
+                <a href="#skills" class="transition hover:text-sky-400">Skills</a>
                 <a href="#projects" class="transition hover:text-sky-400">Projects</a>
                 <a href="#research" class="transition hover:text-sky-400">Research</a>
                 <a href="#publications" class="transition hover:text-sky-400">Publications</a>
@@ -52,6 +53,8 @@
     <div class="grid gap-3 text-sm font-medium text-slate-300">
         <a href="#home" class="rounded-xl px-4 py-2 transition hover:bg-white/5 hover:text-sky-400">Home</a>
         <a href="#about" class="rounded-xl px-4 py-2 transition hover:bg-white/5 hover:text-sky-400">About</a>
+        <a href="#education" class="rounded-xl px-4 py-2 transition hover:bg-white/5 hover:text-sky-400">Education</a>
+        <a href="#skills" class="rounded-xl px-4 py-2 transition hover:bg-white/5 hover:text-sky-400">Skills</a>
         <a href="#projects" class="rounded-xl px-4 py-2 transition hover:bg-white/5 hover:text-sky-400">Projects</a>
         <a href="#research" class="rounded-xl px-4 py-2 transition hover:bg-white/5 hover:text-sky-400">Research</a>
         <a href="#publications" class="rounded-xl px-4 py-2 transition hover:bg-white/5 hover:text-sky-400">Publications</a>
