@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\EducationController;
 use App\Models\Profile;
 use App\Models\Education;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Admin\AboutController;
 Route::get('/', function () {
     $profile = Profile::first();
 
@@ -34,6 +34,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/administrator/about', [AboutController::class, 'edit'])->name('admin.about.edit');
+    Route::put('/administrator/about', [AboutController::class, 'update'])->name('admin.about.update');
 });
 
 require __DIR__.'/auth.php';

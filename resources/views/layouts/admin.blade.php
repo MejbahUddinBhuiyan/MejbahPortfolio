@@ -26,7 +26,9 @@
                 <a href="{{ route('admin.profile.edit') }}" class="block rounded-lg px-4 py-2 hover:bg-slate-800">
                     Profile
                 </a>
-
+                <a href="{{ route('admin.about.edit') }}" class="block rounded-lg px-4 py-2 hover:bg-slate-800">
+                    About
+                </a>
                 <a href="{{ route('admin.education.index') }}"
                    class="block rounded-lg px-4 py-2 hover:bg-slate-800">
                     Education

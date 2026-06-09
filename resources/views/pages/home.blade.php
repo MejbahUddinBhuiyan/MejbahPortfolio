@@ -18,6 +18,7 @@
             <div class="hidden items-center gap-5 text-sm font-medium text-slate-300 lg:flex xl:gap-7">
                 <a href="#home" class="transition hover:text-sky-400">Home</a>
                 <a href="#about" class="transition hover:text-sky-400">About</a>
+                <a href="#education" class="transition hover:text-sky-400">Education</a>
                 <a href="#projects" class="transition hover:text-sky-400">Projects</a>
                 <a href="#research" class="transition hover:text-sky-400">Research</a>
                 <a href="#publications" class="transition hover:text-sky-400">Publications</a>
