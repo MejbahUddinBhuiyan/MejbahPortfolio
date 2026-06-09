@@ -348,6 +348,89 @@
 
     </div>
 </section>
+{{-- Projects Section --}}
+<section id="projects" class="relative z-10 pb-16 pt-8 lg:pb-20 lg:pt-10">
+    <div class="mx-auto max-w-7xl px-6">
+
+        <div class="mb-12 text-center">
+            <span class="rounded-full border border-sky-400/20 bg-sky-400/10 px-4 py-2 text-sm font-medium text-sky-300">
+                Featured Work
+            </span>
+
+            <h2 class="mt-6 text-4xl font-bold text-white md:text-5xl">
+                Projects
+            </h2>
+
+            <p class="mx-auto mt-4 max-w-2xl text-slate-400">
+                Selected projects from my GitHub and development work.
+            </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+            @forelse($projects as $project)
+
+                <div class="glass-card overflow-hidden rounded-3xl">
+
+                    @if($project->image)
+                        <img src="{{ asset('storage/' . $project->image) }}"
+                             alt="{{ $project->title }}"
+                             class="h-52 w-full object-cover">
+                    @else
+                        <div class="flex h-52 items-center justify-center bg-gradient-to-br from-sky-400/20 to-violet-500/20">
+                            <i data-lucide="folder-code" class="h-14 w-14 text-sky-300"></i>
+                        </div>
+                    @endif
+
+                    <div class="p-6">
+                        <span class="text-sm text-sky-400">
+                            {{ $project->category ?? 'Project' }}
+                        </span>
+
+                        <h3 class="mt-2 text-2xl font-bold text-white">
+                            {{ $project->title }}
+                        </h3>
+
+                        <p class="mt-4 line-clamp-3 text-slate-400">
+                            {{ $project->description ?? 'GitHub project synced from repository.' }}
+                        </p>
+
+                        @if($project->tech_stack)
+                            <p class="mt-4 text-sm text-slate-300">
+                                {{ $project->tech_stack }}
+                            </p>
+                        @endif
+
+                        <div class="mt-6 flex flex-wrap gap-3">
+                            @if($project->github_url)
+                                <a href="{{ $project->github_url }}" target="_blank"
+                                   class="rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-slate-300 transition hover:border-sky-400/50 hover:text-sky-400">
+                                    GitHub
+                                </a>
+                            @endif
+
+                            @if($project->live_url)
+                                <a href="{{ $project->live_url }}" target="_blank"
+                                   class="rounded-full bg-sky-400 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-sky-300">
+                                    Live Demo
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+            @empty
+
+                <div class="col-span-full text-center text-slate-500">
+                    No featured projects selected yet.
+                </div>
+
+            @endforelse
+
+        </div>
+
+    </div>
+</section>
 {{-- Social Media Section --}}
 <section id="social" class="relative z-10 pb-20 pt-8">
     <div class="mx-auto max-w-7xl px-6">

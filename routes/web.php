@@ -10,6 +10,7 @@ use App\Models\Profile;
 use App\Models\Education;
 use App\Models\About;
 use App\Models\Skill;
+use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 
 
@@ -26,11 +27,16 @@ Route::get('/', function () {
     $skills = Skill::orderBy('sort_order')
         ->get();
 
+    $projects = Project::where('is_featured', true)
+        ->latest()
+        ->get();    
+
     return view('pages.home', compact(
         'profile',
         'about',
         'educations',
-        'skills'
+        'skills',
+        'projects'
     ));
 });
 
