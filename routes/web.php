@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\EducationController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\SkillController;
+use App\Http\Controllers\Admin\ProjectController;
 use App\Models\Profile;
 use App\Models\Education;
 use App\Models\About;
@@ -67,7 +68,12 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
     Route::resource('/administrator/skills', SkillController::class)
-        ->names('admin.skills');    
+        ->names('admin.skills');  
+    Route::resource('/administrator/projects', ProjectController::class)
+        ->names('admin.projects');
+
+    Route::post('/administrator/projects/sync-github', [ProjectController::class, 'syncGithub'])
+        ->name('admin.projects.syncGithub');      
 });
 
 require __DIR__.'/auth.php';
