@@ -1,15 +1,3 @@
-FROM node:20 AS nodebuild
-
-WORKDIR /app
-
-COPY package*.json vite.config.js tailwind.config.js postcss.config.js ./
-COPY resources ./resources
-COPY public ./public
-
-RUN npm install
-RUN npm run build
-
-
 FROM composer:2 AS vendor
 
 WORKDIR /app
@@ -17,6 +5,21 @@ WORKDIR /app
 COPY composer.json composer.lock ./
 
 RUN composer install --no-dev --no-interaction --prefer-dist --no-scripts --optimize-autoloader
+
+
+FROM node:20 AS nodebuild
+
+WORKDIR /app
+
+COPY package*.json ./
+COPY vite.config.js ./
+COPY tailwind.config.js ./
+COPY postcss.config.js ./
+COPY resources ./resources
+COPY public ./public
+
+RUN npm install
+RUN npm run build
 
 
 FROM php:8.2-apache
