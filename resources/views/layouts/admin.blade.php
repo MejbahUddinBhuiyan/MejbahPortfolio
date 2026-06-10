@@ -54,13 +54,26 @@
                     Publications
                 </a>
 
-                <a href="#" class="block rounded-lg px-4 py-2 hover:bg-slate-800">
-                    Blogs
+                <a href="{{ route('admin.blogs.index') }}"
+                     class="block rounded-lg px-4 py-2 hover:bg-slate-800
+                     {{ request()->routeIs('admin.blogs.*') ? 'bg-slate-800 text-sky-400' : '' }}">
+                      Blogs
                 </a>
 
-                <a href="#" class="block rounded-lg px-4 py-2 hover:bg-slate-800">
+                <a href="{{ route('admin.gallery.index') }}"
+                    class="block rounded-lg px-4 py-2 hover:bg-slate-800
+                    {{ request()->routeIs('admin.gallery.*') ? 'bg-slate-800 text-sky-400' : '' }}">
                     Gallery
                 </a>
+                <a href="{{ route('admin.contacts.index') }}"
+                   class="block rounded-lg px-4 py-2 hover:bg-slate-800">
+                    Contacts
+                </a>
+                <a href="{{ route('admin.socials.index') }}"
+                   class="block rounded-lg px-4 py-2 hover:bg-slate-800
+                   {{ request()->routeIs('admin.socials.*') ? 'bg-slate-800 text-sky-400' : '' }}">
+                    Social Media
+                </a>                
 
             </nav>
             <form method="POST" action="{{ route('logout') }}">

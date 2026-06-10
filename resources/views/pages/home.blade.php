@@ -22,7 +22,7 @@
                 <a href="#skills" class="transition hover:text-sky-400">Skills</a>
                 <a href="#projects" class="transition hover:text-sky-400">Projects</a>
                 <a href="#research" class="transition hover:text-sky-400">Research</a>
-                <a href="#publications" class="transition hover:text-sky-400">Publications</a>
+                <!-- <a href="#publications" class="transition hover:text-sky-400">Publications</a> -->
                 <a href="#blog" class="transition hover:text-sky-400">Blog</a>
                 <a href="#gallery" class="transition hover:text-sky-400">Gallery</a>
                 <a href="#contact" class="transition hover:text-sky-400">Contact</a>
@@ -57,7 +57,7 @@
         <a href="#skills" class="rounded-xl px-4 py-2 transition hover:bg-white/5 hover:text-sky-400">Skills</a>
         <a href="#projects" class="rounded-xl px-4 py-2 transition hover:bg-white/5 hover:text-sky-400">Projects</a>
         <a href="#research" class="rounded-xl px-4 py-2 transition hover:bg-white/5 hover:text-sky-400">Research</a>
-        <a href="#publications" class="rounded-xl px-4 py-2 transition hover:bg-white/5 hover:text-sky-400">Publications</a>
+        <!-- <a href="#publications" class="rounded-xl px-4 py-2 transition hover:bg-white/5 hover:text-sky-400">Publications</a> -->
         <a href="#blog" class="rounded-xl px-4 py-2 transition hover:bg-white/5 hover:text-sky-400">Blog</a>
         <a href="#gallery" class="rounded-xl px-4 py-2 transition hover:bg-white/5 hover:text-sky-400">Gallery</a>
         <a href="#contact" class="rounded-xl px-4 py-2 transition hover:bg-white/5 hover:text-sky-400">Contact</a>
@@ -298,7 +298,7 @@
                 Technical Expertise
             </span>
 
-            <h2 class="mt-6 text-4xl font-bold text-white md:text-5xl">
+           <h2 class="mt-6 text-5xl font-bold text-white">
                 Skills
             </h2>
 
@@ -431,8 +431,363 @@
 
     </div>
 </section>
+{{-- Research Section --}}
+<section id="research" class="relative z-10 pb-16 pt-8 lg:pb-20 lg:pt-10">
+    <div class="mx-auto max-w-7xl px-6">
+
+        <div class="mb-12 text-center">
+            <span class="rounded-full border border-sky-400/20 bg-sky-400/10 px-4 py-2 text-sm font-medium text-sky-300">
+                Research Focus
+            </span>
+
+            <h2 class="mt-6 text-4xl font-bold text-white md:text-5xl">
+                Research
+            </h2>
+
+            <p class="mx-auto mt-4 max-w-2xl text-slate-400">
+                Research projects, academic works, and scientific contributions.
+            </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+            @forelse($researches as $research)
+
+                <div class="glass-card overflow-hidden rounded-3xl">
+
+                    @if($research->image)
+                        <img src="{{ asset('storage/' . $research->image) }}"
+                             alt="{{ $research->title }}"
+                             class="h-52 w-full object-cover">
+                    @else
+                        <div class="flex h-52 items-center justify-center bg-gradient-to-br from-sky-400/20 to-violet-500/20">
+                            <i data-lucide="microscope" class="h-14 w-14 text-sky-300"></i>
+                        </div>
+                    @endif
+
+                    <div class="p-6">
+                        <div class="flex items-center justify-between gap-3">
+                            <span class="text-sm text-sky-400">
+                                {{ $research->category ?? 'Research' }}
+                            </span>
+
+                            <span class="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-300">
+                                {{ $research->status }}
+                            </span>
+                        </div>
+
+                        <h3 class="mt-3 text-2xl font-bold text-white">
+                            {{ $research->title }}
+                        </h3>
+
+                        @if($research->institution)
+                            <p class="mt-2 text-sm text-slate-300">
+                                {{ $research->institution }}
+                            </p>
+                        @endif
+
+                        <p class="mt-4 line-clamp-3 text-slate-400">
+                            {{ $research->description }}
+                        </p>
+
+                        @if($research->collaborators)
+                            <p class="mt-4 text-sm text-slate-300">
+                                Collaborators: {{ $research->collaborators }}
+                            </p>
+                        @endif
+
+                        @if($research->publication_link)
+                            <div class="mt-6">
+                                <a href="{{ $research->publication_link }}" target="_blank"
+                                   class="rounded-full bg-sky-400 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-sky-300">
+                                    View Publication
+                                </a>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+
+            @empty
+
+                <div class="col-span-full text-center text-slate-500">
+                    No featured research selected yet.
+                </div>
+
+            @endforelse
+
+        </div>
+
+    </div>
+</section>
+{{-- Blog Section --}}
+<section id="blog" class="relative z-10 pb-16 pt-2 lg:pb-20 lg:pt-4">
+    <div class="mx-auto max-w-7xl px-6">
+
+        <div class="mb-12 text-center">
+            <span class="rounded-full border border-sky-400/20 bg-sky-400/10 px-4 py-2 text-sm font-medium text-sky-300">
+                Latest Articles
+            </span>
+
+            <h2 class="mt-6 text-4xl font-bold text-white md:text-5xl">
+                Blog
+            </h2>
+
+            <p class="mx-auto mt-4 max-w-2xl text-slate-400">
+                Thoughts, tutorials, research notes, and development articles.
+            </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+            @forelse($blogs as $blog)
+
+                <div class="glass-card overflow-hidden rounded-3xl flex flex-col">
+
+                    @if($blog->featured_image)
+                        <img src="{{ asset('storage/' . $blog->featured_image) }}"
+                                alt="{{ $blog->title }}"
+                                class="h-52 w-full object-cover">
+                    @endif
+
+                    <div class="p-6 flex flex-col flex-1">
+
+                        <span class="text-sm text-sky-400">
+                            {{ $blog->category }}
+                        </span>
+
+                        <h3 class="mt-3 text-2xl font-bold text-white">
+                            {{ $blog->title }}
+                        </h3>
+
+                        <p class="mt-4 line-clamp-3 text-slate-400">
+                            {{ $blog->excerpt ?? Str::limit(strip_tags($blog->content),120) }}
+                        </p>
+
+                        <p class="mt-4 text-sm text-slate-500">
+                            {{ $blog->published_at ? \Carbon\Carbon::parse($blog->published_at)->format('M d, Y') : '' }}
+                        </p>
+
+                        <div class="mt-auto pt-6">
+                            <a href="{{ route('blog.show',$blog->slug) }}"
+                                class="rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-slate-300 transition hover:border-sky-400/50 hover:text-sky-400">
+                                Read More
+                            </a>
+                        </div>
+
+                    </div>
+        </div>
+
+            @empty
+
+                <div class="col-span-full text-center text-slate-500">
+                    No published blogs available yet.
+                </div>
+
+            @endforelse
+
+        </div>
+
+    </div>
+</section>
+{{-- Gallery Section --}}
+<section id="gallery" class="relative z-10 pt-6 pb-16 lg:pt-8 lg:pb-20">
+
+    <div class="mx-auto max-w-7xl px-6">
+
+        <div class="mb-12 text-center">
+
+            <span
+                class="rounded-full border border-sky-400/20 bg-sky-400/10 px-4 py-2 text-sm font-medium text-sky-300">
+                Visual Showcase
+            </span>
+
+            <h2 class="mt-6 text-5xl font-bold text-white">
+                Gallery
+            </h2>
+
+            <p class="mx-auto mt-4 max-w-2xl text-slate-400">
+                Moments from research, projects, conferences, achievements and professional activities.
+            </p>
+
+        </div>
+
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+            @forelse($galleries as $gallery)
+
+                <div
+                    class="group overflow-hidden rounded-3xl border border-white/10 bg-white/5 transition hover:border-sky-400/30">
+
+                    <div class="overflow-hidden">
+
+                        <a href="{{ asset('storage/' . $gallery->image) }}"
+                            target="_blank">
+
+                            <img
+                                src="{{ asset('storage/' . $gallery->image) }}"
+                                alt="{{ $gallery->title }}"
+                                class="h-72 w-full object-cover transition duration-500 group-hover:scale-110">
+
+                        </a>
+
+                    </div>
+
+                    <div class="p-5">
+
+                        @if($gallery->category)
+                            <span class="text-sm text-sky-400">
+                                {{ $gallery->category }}
+                            </span>
+                        @endif
+
+                        <h3 class="mt-2 text-xl font-bold text-white">
+                            {{ $gallery->title }}
+                        </h3>
+
+                        @if($gallery->caption)
+                            <p class="mt-3 text-slate-400">
+                                {{ $gallery->caption }}
+                            </p>
+                        @endif
+
+                    </div>
+
+                </div>
+
+            @empty
+
+                <div class="col-span-full text-center text-slate-500">
+                    No gallery images available.
+                </div>
+
+            @endforelse
+
+        </div>
+
+    </div>
+
+</section>
+<!-- Contact Section -->
+<section id="contact" class="relative z-10 pt-6 pb-16 lg:pt-8 lg:pb-20">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="text-center mb-16">
+            <span
+                class="rounded-full border border-sky-400/20 bg-sky-400/10 px-4 py-2 text-sm font-medium text-sky-300">
+                Get In Touch
+            </span>
+
+            <h2 class="mt-6 text-5xl font-bold text-white">
+                Contact
+            </h2>
+
+           <p class="mx-auto mt-4 max-w-2xl text-slate-400">
+                Feel free to contact me for research collaborations, projects,
+                academic discussions, or professional opportunities.
+            </p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-10">
+
+            <!-- Contact Info -->
+            <div
+                class="bg-slate-900/60 border border-slate-800 rounded-3xl p-8">
+
+                <h3 class="text-3xl font-bold text-white mb-8">
+                    Contact Information
+                </h3>
+
+                <div class="space-y-6">
+
+                    <div>
+                        <p class="text-cyan-400 text-sm mb-1">Email</p>
+                        <p class="text-slate-300 text-lg">
+                            {{ $profile->email ?? 'your@email.com' }}
+                        </p>
+                    </div>
+
+                    <div>
+                        <p class="text-cyan-400 text-sm mb-1">Phone</p>
+                        <p class="text-slate-300 text-lg">
+                            {{ $profile->phone ?? '+8801XXXXXXXXX' }}
+                        </p>
+                    </div>
+
+                    <div>
+                        <p class="text-cyan-400 text-sm mb-1">Location</p>
+                        <p class="text-slate-300 text-lg">
+                            {{ $profile->location ?? 'Bangladesh' }}
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div
+                class="bg-slate-900/60 border border-slate-800 rounded-3xl p-8">
+
+                @if(session('success'))
+                    <div
+                        class="mb-6 p-4 rounded-xl bg-green-500/10 border border-green-500/30 text-green-400">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <form action="{{ route('contact.store') }}" method="POST">
+                    @csrf
+
+                    <div class="mb-5">
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Your Name"
+                            required
+                            class="w-full rounded-xl bg-slate-800 border border-slate-700 text-white px-5 py-4 focus:outline-none focus:border-cyan-500">
+                    </div>
+
+                    <div class="mb-5">
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Your Email"
+                            required
+                            class="w-full rounded-xl bg-slate-800 border border-slate-700 text-white px-5 py-4 focus:outline-none focus:border-cyan-500">
+                    </div>
+
+                    <div class="mb-5">
+                        <input
+                            type="text"
+                            name="subject"
+                            placeholder="Subject"
+                            required
+                            class="w-full rounded-xl bg-slate-800 border border-slate-700 text-white px-5 py-4 focus:outline-none focus:border-cyan-500">
+                    </div>
+
+                    <div class="mb-5">
+                        <textarea
+                            name="message"
+                            rows="6"
+                            placeholder="Your Message"
+                            required
+                            class="w-full rounded-xl bg-slate-800 border border-slate-700 text-white px-5 py-4 focus:outline-none focus:border-cyan-500"></textarea>
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="px-8 py-4 bg-cyan-500 hover:bg-cyan-600 text-black font-semibold rounded-xl transition">
+                        Send Message
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</section>
 {{-- Social Media Section --}}
-<section id="social" class="relative z-10 pb-20 pt-8">
+{{-- Social Media Section --}}
+<section id="social" class="relative z-10 pb-20 pt-4 lg:pt-6">
     <div class="mx-auto max-w-7xl px-6">
 
         <div class="mb-10 text-center">
@@ -440,31 +795,28 @@
                 Connect With Me
             </span>
 
-            <h2 class="mt-6 text-4xl font-bold text-white md:text-5xl">
+            <h2 class="mt-6 text-5xl font-bold text-white">
                 Social Platforms
             </h2>
         </div>
 
         <div class="mx-auto grid max-w-5xl grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            @php
-                $socials = [
-                    ['label' => 'GitHub', 'url' => 'https://github.com/MejbahUddinBhuiyan'],
-                    ['label' => 'LinkedIn', 'url' => 'https://www.linkedin.com/in/mejbah-uddin-bhuiyan-79b9b6249/'],
-                    ['label' => 'ResearchGate', 'url' => 'https://www.researchgate.net/profile/Mejbah-Bhuiyan-2'],
-                    ['label' => 'Codeforces', 'url' => 'https://codeforces.com/profile/mejbah09'],
-                    ['label' => 'LeetCode', 'url' => 'https://leetcode.com/u/mejbah09/'],
-                    ['label' => 'HackerRank', 'url' => 'https://www.hackerrank.com/profile/mejbahu475'],
-                    ['label' => 'Facebook', 'url' => 'https://www.facebook.com/Mejbah.Moushom666/'],
-                    ['label' => 'Instagram', 'url' => 'https://www.instagram.com/__wiz_zard__/'],
-                ];
-            @endphp
 
-            @foreach ($socials as $social)
-                <a href="{{ $social['url'] }}" target="_blank"
+            @forelse ($socials as $social)
+
+                <a href="{{ $social->url }}" target="_blank"
                    class="glass-card rounded-2xl px-5 py-4 text-center text-sm font-semibold text-slate-300 transition hover:-translate-y-1 hover:border-sky-400/50 hover:text-sky-400">
-                    {{ $social['label'] }}
+                    {{ $social->platform }}
                 </a>
-            @endforeach
+
+            @empty
+
+                <div class="col-span-full text-center text-slate-500">
+                    No social links available.
+                </div>
+
+            @endforelse
+
         </div>
 
     </div>
