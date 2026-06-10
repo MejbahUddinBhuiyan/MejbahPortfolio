@@ -96,7 +96,7 @@
                 </p>
 
                 <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start">
-                    <a href="{{ $profile?->cv_file ? asset('storage/' . $profile->cv_file) : '#' }}"
+                    <a href="{{ $profile?->cv_file ?? '#' }}"
                        target="{{ $profile?->cv_file ? '_blank' : '_self' }}"
                        class="rounded-full bg-sky-400 px-6 py-3 text-center font-semibold text-slate-950 shadow-lg shadow-sky-400/20 transition hover:-translate-y-1 hover:bg-sky-300">
                         Download CV
@@ -114,7 +114,7 @@
                         <div class="mx-auto flex h-56 w-56 items-center justify-center rounded-full border border-white/10 bg-white/10 text-center backdrop-blur-xl sm:h-72 sm:w-72">
                             <div>
                                 @if ($profile?->profile_image)
-                                <img src="{{ asset('storage/' . $profile->profile_image) }}"
+                                <img src="{{$profile->profile_image}}"
                                      alt="Mejbah Uddin Bhuiyan"
                                      class="h-full w-full rounded-full object-cover">
                                 @else
@@ -163,7 +163,7 @@
             <div class="glass-card rounded-[2rem] p-4 sm:p-6">
                 <div class="rounded-[1.5rem] border border-white/10 bg-gradient-to-br from-sky-400/20 to-violet-500/20 p-6 sm:p-8">
                     @if ($about?->photo)
-                        <img src="{{ asset('storage/' . $about->photo) }}"
+                        <img src="{{ $about->photo }}"
                              alt="About Mejbah"
                              class="h-80 w-full rounded-[1.5rem] object-cover">
                     @else
@@ -206,7 +206,7 @@
                 </div>
 
                 @if ($about?->resume)
-                    <a href="{{ asset('storage/' . $about->resume) }}"
+                    <a href="{{ $about->resume }}"
                        target="_blank"
                        class="mt-8 inline-flex rounded-full bg-sky-400 px-6 py-3 font-semibold text-slate-950 shadow-lg shadow-sky-400/20 transition hover:-translate-y-1 hover:bg-sky-300">
                         Download Resume
@@ -364,7 +364,7 @@
                 Certificates
             </h2>
 
-            <p class="mx-auto mt-6 max-w-3xl text-xl text-slate-400">
+            <p class="mx-auto mt-4 max-w-2xl text-slate-400">
                 Professional certifications, training programs and academic achievements.
             </p>
 
@@ -378,7 +378,7 @@
 
                     @if($certificate->image)
                         <img
-                            src="{{ asset('storage/' . $certificate->image) }}"
+                            src="{{$certificate->certificate_file}}"
                             alt="{{ $certificate->title }}"
                             class="h-56 w-full object-cover">
                     @endif
@@ -408,7 +408,7 @@
                             @endif
 
                             @if($certificate->certificate_file)
-                                <a href="{{ asset('storage/'.$certificate->certificate_file) }}"
+                                <a href="{{ $certificate->certificate_file }}"
                                    target="_blank"
                                    class="rounded-xl border border-slate-700 px-5 py-3 text-slate-300">
                                     View PDF
@@ -453,7 +453,7 @@
                 <div class="glass-card overflow-hidden rounded-3xl">
 
                     @if($project->image)
-                        <img src="{{ asset('storage/' . $project->image) }}"
+                        <img src="{{ $project->image }}"
                              alt="{{ $project->title }}"
                              class="h-52 w-full object-cover">
                     @else
@@ -536,7 +536,7 @@
                 <div class="glass-card overflow-hidden rounded-3xl">
 
                     @if($research->image)
-                        <img src="{{ asset('storage/' . $research->image) }}"
+                        <img src="{{ $research->image }}"
                              alt="{{ $research->title }}"
                              class="h-52 w-full object-cover">
                     @else
@@ -624,7 +624,7 @@
                 <div class="glass-card overflow-hidden rounded-3xl flex flex-col">
 
                     @if($blog->featured_image)
-                        <img src="{{ asset('storage/' . $blog->featured_image) }}"
+                        <img src="{{ $blog->featured_image }}"
                                 alt="{{ $blog->title }}"
                                 class="h-52 w-full object-cover">
                     @endif
@@ -701,7 +701,7 @@
                     <div class="overflow-hidden">
 
                         <img
-                            src="{{ asset('storage/' . $gallery->image) }}"
+                            src="{{ $gallery->image }}"
                             alt="{{ $gallery->title }}"
                             class="gallery-image h-72 w-full cursor-pointer object-cover transition duration-500 group-hover:scale-110">                        
 

@@ -57,7 +57,7 @@
 
                 @if (!empty($about?->photo))
                     <div class="mt-3">
-                        <img src="{{ asset('storage/' . $about->photo) }}"
+                        <img src="{{ $about->photo }}"
                              class="h-32 w-32 rounded-2xl border border-white/10 object-cover">
                     </div>
                 @endif
@@ -71,7 +71,7 @@
 
                 @if (!empty($about?->resume))
                     <div class="mt-3">
-                        <a href="{{ asset('storage/' . $about->resume) }}" target="_blank"
+                        <a href="{{ $about->resume }}" target="_blank"
                            class="inline-flex rounded-xl border border-sky-400/30 bg-sky-400/10 px-4 py-2 text-sm font-semibold text-sky-300">
                             View Current Resume
                         </a>

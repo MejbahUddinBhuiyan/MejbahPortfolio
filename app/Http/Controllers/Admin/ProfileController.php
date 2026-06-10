@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Profile;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use App\Support\CloudinaryUploader;
 
 class ProfileController extends Controller
 {
@@ -35,19 +35,19 @@ class ProfileController extends Controller
         $data['is_available'] = $request->has('is_available');
 
         if ($request->hasFile('profile_image')) {
-            if ($profile && $profile->profile_image) {
-                Storage::disk('public')->delete($profile->profile_image);
-            }
 
-            $data['profile_image'] = $request->file('profile_image')->store('profile', 'public');
+            $data['profile_image'] = CloudinaryUploader::upload(
+                $request->file('profile_image'),
+                'portfolio/profile'
+            );
         }
 
         if ($request->hasFile('cv_file')) {
-            if ($profile && $profile->cv_file) {
-                Storage::disk('public')->delete($profile->cv_file);
-            }
 
-            $data['cv_file'] = $request->file('cv_file')->store('cv', 'public');
+            $data['cv_file'] = CloudinaryUploader::upload(
+                $request->file('cv_file'),
+                'portfolio/cv'
+            );
         }
 
         Profile::updateOrCreate(

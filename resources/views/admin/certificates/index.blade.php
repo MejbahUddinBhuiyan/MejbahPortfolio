@@ -43,7 +43,7 @@
 
                     <td class="px-8 py-6">
                         @if($certificate->image)
-                            <img src="{{ asset('storage/'.$certificate->image) }}"
+                            <img src="{{ $certificate->image }}"
                                  class="h-16 w-24 rounded-lg object-cover">
                         @endif
                     </td>

@@ -24,7 +24,7 @@
     <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         @forelse ($galleries as $gallery)
             <div class="overflow-hidden rounded-3xl border border-white/10 bg-white/5">
-                <img src="{{ asset('storage/' . $gallery->image) }}"
+                <img src="{{ $gallery->image }}"
                      alt="{{ $gallery->title }}"
                      class="h-56 w-full object-cover">
 

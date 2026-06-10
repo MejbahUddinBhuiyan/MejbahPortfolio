@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use App\Support\CloudinaryUploader;
 
 class BlogController extends Controller
 {
@@ -36,9 +36,10 @@ class BlogController extends Controller
         $data['slug'] = \Str::slug($request->title);
 
         if ($request->hasFile('featured_image')) {
-            $data['featured_image'] = $request
-                ->file('featured_image')
-                ->store('blogs', 'public');
+            $data['featured_image'] = CloudinaryUploader::upload(
+                $request->file('featured_image'),
+                '        portfolio/blogs'
+            );
         }
 
         Blog::create($data);
@@ -69,13 +70,10 @@ class BlogController extends Controller
 
         if ($request->hasFile('featured_image')) {
 
-            if ($blog->featured_image) {
-                Storage::disk('public')->delete($blog->featured_image);
-            }
-
-            $data['featured_image'] = $request
-                ->file('featured_image')
-                ->store('blogs', 'public');
+            $data['featured_image'] = CloudinaryUploader::upload(
+                $request->file('featured_image'),
+                'portfolio/blogs'
+            );
         }
 
         $blog->update($data);
@@ -87,12 +85,8 @@ class BlogController extends Controller
 
     public function destroy(Blog $blog)
     {
-        if ($blog->featured_image) {
-            Storage::disk('public')->delete($blog->featured_image);
-        }
-
         $blog->delete();
 
-        return back()->with('success', 'Blog deleted successfully.');
+         return back()->with('success', 'Blog deleted successfully.');
     }
 }

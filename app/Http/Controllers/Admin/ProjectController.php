@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Storage;
+use App\Support\CloudinaryUploader;
 use Illuminate\Support\Str;
 
 class ProjectController extends Controller
@@ -40,11 +40,10 @@ class ProjectController extends Controller
         $data['is_featured'] = $request->has('is_featured');
 
         if ($request->hasFile('image')) {
-            if ($project->image) {
-                Storage::disk('public')->delete($project->image);
-            }
-
-            $data['image'] = $request->file('image')->store('projects', 'public');
+            $data['image'] = CloudinaryUploader::upload(
+                $request->file('image'),
+                'portfolio/projects'
+            );
         }
 
         $project->update($data);
@@ -56,10 +55,6 @@ class ProjectController extends Controller
 
     public function destroy(Project $project)
     {
-        if ($project->image) {
-            Storage::disk('public')->delete($project->image);
-        }
-
         $project->delete();
 
         return redirect()

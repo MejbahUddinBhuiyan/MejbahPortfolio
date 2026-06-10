@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Research;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use App\Support\CloudinaryUploader;
 
 class ResearchController extends Controller
 {
@@ -39,7 +39,10 @@ class ResearchController extends Controller
         $data['is_featured'] = $request->has('is_featured');
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('research', 'public');
+            $data['image'] = CloudinaryUploader::upload(
+                $request->file('image'),
+                'portfolio/research'
+            );
         }
 
         Research::create($data);
@@ -72,11 +75,10 @@ class ResearchController extends Controller
         $data['is_featured'] = $request->has('is_featured');
 
         if ($request->hasFile('image')) {
-            if ($research->image) {
-                Storage::disk('public')->delete($research->image);
-            }
-
-            $data['image'] = $request->file('image')->store('research', 'public');
+            $data['image'] = CloudinaryUploader::upload(
+                $request->file('image'),
+                'portfolio/research'
+            );
         }
 
         $research->update($data);
@@ -88,14 +90,10 @@ class ResearchController extends Controller
 
     public function destroy(Research $research)
     {
-        if ($research->image) {
-            Storage::disk('public')->delete($research->image);
-        }
+    $research->delete();
 
-        $research->delete();
-
-        return redirect()
-            ->route('admin.research.index')
-            ->with('success', 'Research deleted successfully.');
+    return redirect()
+        ->route('admin.research.index')
+        ->with('success', 'Research deleted successfully.');
     }
 }

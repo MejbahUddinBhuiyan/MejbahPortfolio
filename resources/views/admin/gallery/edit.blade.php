@@ -47,7 +47,7 @@
         <div>
             <label class="mb-2 block font-medium">Current Image</label>
 
-            <img src="{{ asset('storage/' . $gallery->image) }}"
+            <img src="{{ $gallery->image }}"
                  class="mb-4 h-40 rounded-xl object-cover">
         </div>
 

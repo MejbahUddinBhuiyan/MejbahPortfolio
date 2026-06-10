@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Certificate;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use App\Support\CloudinaryUploader;
 
 class CertificateController extends Controller
 {
@@ -33,13 +33,17 @@ class CertificateController extends Controller
         ]);
 
         if ($request->hasFile('certificate_file')) {
-            $data['certificate_file'] = $request->file('certificate_file')
-                ->store('certificates/files', 'public');
-        }
+           $data['certificate_file'] = CloudinaryUploader::upload(
+               $request->file('certificate_file'),
+               'portfolio/certificates/files'
+           );
+       }
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')
-                ->store('certificates/images', 'public');
+            $data['image'] = CloudinaryUploader::upload(
+                $request->file('image'),
+                'portfolio/certificates/images'
+            );
         }
 
         Certificate::create($data);
@@ -66,23 +70,18 @@ class CertificateController extends Controller
         ]);
 
         if ($request->hasFile('certificate_file')) {
-            if ($certificate->certificate_file) {
-                Storage::disk('public')->delete($certificate->certificate_file);
-            }
-
-            $data['certificate_file'] = $request->file('certificate_file')
-                ->store('certificates/files', 'public');
-        }
+                $data['certificate_file'] = CloudinaryUploader::upload(
+                $request->file('certificate_file'),
+                'portfolio/certificates/files'
+            );
+       }
 
         if ($request->hasFile('image')) {
-            if ($certificate->image) {
-                Storage::disk('public')->delete($certificate->image);
-            }
-
-            $data['image'] = $request->file('image')
-                ->store('certificates/images', 'public');
-        }
-
+            $data['image'] = CloudinaryUploader::upload(
+            $request->file('image'),
+            'portfolio/certificates/images'
+           );
+    }
         $certificate->update($data);
 
         return redirect()
@@ -91,19 +90,11 @@ class CertificateController extends Controller
     }
 
     public function destroy(Certificate $certificate)
-    {
-        if ($certificate->certificate_file) {
-            Storage::disk('public')->delete($certificate->certificate_file);
+        {
+            $certificate->delete();
+
+            return redirect()
+                ->route('admin.certificates.index')
+                ->with('success', 'Certificate deleted successfully.');
         }
-
-        if ($certificate->image) {
-            Storage::disk('public')->delete($certificate->image);
-        }
-
-        $certificate->delete();
-
-        return redirect()
-            ->route('admin.certificates.index')
-            ->with('success', 'Certificate deleted successfully.');
-    }
 }

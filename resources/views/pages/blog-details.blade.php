@@ -10,7 +10,7 @@
         </a>
 
         @if($blog->featured_image)
-            <img src="{{ asset('storage/' . $blog->featured_image) }}"
+            <img src="{{ $blog->featured_image }}"
                  alt="{{ $blog->title }}"
                  class="mt-8 h-80 w-full rounded-3xl object-cover">
         @endif

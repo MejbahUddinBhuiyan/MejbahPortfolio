@@ -50,7 +50,7 @@
                 <label class="block text-sm font-medium text-slate-300">Featured Image</label>
 
                 @if($blog->featured_image)
-                    <img src="{{ asset('storage/' . $blog->featured_image) }}"
+                    <img src="{{ $blog->featured_image }}"
                          class="mt-3 h-32 w-48 rounded-xl border border-white/10 object-cover">
                 @endif
 

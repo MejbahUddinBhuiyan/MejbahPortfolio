@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\About;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use App\Support\CloudinaryUploader;
 
 class AboutController extends Controller
 {
@@ -31,19 +31,17 @@ class AboutController extends Controller
         ]);
 
         if ($request->hasFile('photo')) {
-            if ($about && $about->photo) {
-                Storage::disk('public')->delete($about->photo);
-            }
-
-            $data['photo'] = $request->file('photo')->store('about', 'public');
+           $data['photo'] = CloudinaryUploader::upload(
+           $request->file('photo'),
+           'portfolio/about'
+          );
         }
 
         if ($request->hasFile('resume')) {
-            if ($about && $about->resume) {
-                Storage::disk('public')->delete($about->resume);
-            }
-
-            $data['resume'] = $request->file('resume')->store('resume', 'public');
+              $data['resume'] = CloudinaryUploader::upload(
+              $request->file('resume'),
+              'portfolio/about-resume'
+             );
         }
 
         About::updateOrCreate(['id' => 1], $data);

@@ -66,7 +66,7 @@
                 <label class="block text-sm font-medium text-slate-300">Research Image</label>
 
                 @if($research->image)
-                    <img src="{{ asset('storage/' . $research->image) }}"
+                   <img src="{{ $research->image }}"
                          class="mt-3 h-32 w-48 rounded-xl border border-white/10 object-cover">
                 @endif
 

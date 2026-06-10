@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Gallery;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
@@ -31,14 +30,21 @@ class GalleryController extends Controller
             'image' => 'required|image|max:2048',
         ]);
 
-        $imagePath = $request->file('image')->store('gallery', 'public');
+        $cloudinary = new \Cloudinary\Cloudinary(config('cloudinary.cloud_url'));
+
+        $result = $cloudinary->uploadApi()->upload(
+            $request->file('image')->getRealPath(),
+            [
+                'folder' => 'portfolio/gallery'
+            ]
+        );
 
         Gallery::create([
             'title' => $request->title,
             'category' => $request->category,
             'caption' => $request->caption,
             'sort_order' => $request->sort_order ?? 0,
-            'image' => $imagePath,
+            'image' => $result['secure_url'],
         ]);
 
         return redirect()
@@ -70,12 +76,16 @@ class GalleryController extends Controller
 
         if ($request->hasFile('image')) {
 
-            if ($gallery->image) {
-                Storage::disk('public')->delete($gallery->image);
-            }
+            $cloudinary = new \Cloudinary\Cloudinary(config('cloudinary.cloud_url'));
 
-            $data['image'] = $request->file('image')
-                ->store('gallery', 'public');
+            $result = $cloudinary->uploadApi()->upload(
+                $request->file('image')->getRealPath(),
+                [
+                    'folder' => 'portfolio/gallery'
+                ]
+            );
+
+            $data['image'] = $result['secure_url'];
         }
 
         $gallery->update($data);
@@ -87,10 +97,6 @@ class GalleryController extends Controller
 
     public function destroy(Gallery $gallery)
     {
-        if ($gallery->image) {
-            Storage::disk('public')->delete($gallery->image);
-        }
-
         $gallery->delete();
 
         return redirect()
