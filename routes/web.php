@@ -15,7 +15,9 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\SocialController;
 use App\Http\Controllers\Admin\ContactMessageController;
+use App\Http\Controllers\Admin\CertificateController;
 
+use App\Models\Certificate;
 use App\Models\Profile;
 use App\Models\About;
 use App\Models\Education;
@@ -44,7 +46,7 @@ Route::get('/', function () {
 
     $skills = Skill::orderBy('sort_order')
         ->get();
-
+    $certificates = Certificate::latest()->get();
     $projects = Project::where('is_featured', true)
         ->latest()
         ->get();
@@ -72,6 +74,7 @@ Route::get('/', function () {
         'about',
         'educations',
         'skills',
+        'certificates',
         'projects',
         'researches',
         'blogs',
@@ -234,6 +237,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
+
+    Route::resource('/administrator/certificates', CertificateController::class)
+        ->names('admin.certificates');    
 });
 
 require __DIR__.'/auth.php';

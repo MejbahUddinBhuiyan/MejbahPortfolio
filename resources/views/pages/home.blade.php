@@ -20,6 +20,10 @@
                 <a href="#about" class="transition hover:text-sky-400">About</a>
                 <a href="#education" class="transition hover:text-sky-400">Education</a>
                 <a href="#skills" class="transition hover:text-sky-400">Skills</a>
+                <a href="#certificates"
+                   class="transition hover:text-sky-400">
+                    Certificates
+                </a>
                 <a href="#projects" class="transition hover:text-sky-400">Projects</a>
                 <a href="#research" class="transition hover:text-sky-400">Research</a>
                 <!-- <a href="#publications" class="transition hover:text-sky-400">Publications</a> -->
@@ -39,10 +43,6 @@
                     LinkedIn
                 </a>
 
-                <button class="rounded-full border border-white/10 p-2 text-slate-300 transition hover:border-sky-400/50 hover:text-sky-400">
-                    <i data-lucide="moon" class="h-4 w-4"></i>
-                </button>
-
 <button id="mobile-menu-button" type="button"
         class="rounded-full border border-white/10 p-2 text-slate-300 transition hover:border-sky-400/50 hover:text-sky-400 lg:hidden">
     <i data-lucide="menu" class="h-4 w-4"></i>
@@ -55,6 +55,7 @@
         <a href="#about" class="rounded-xl px-4 py-2 transition hover:bg-white/5 hover:text-sky-400">About</a>
         <a href="#education" class="rounded-xl px-4 py-2 transition hover:bg-white/5 hover:text-sky-400">Education</a>
         <a href="#skills" class="rounded-xl px-4 py-2 transition hover:bg-white/5 hover:text-sky-400">Skills</a>
+        <a href="#certificates" class="rounded-xl px-4 py-2 transition hover:bg-white/5 hover:text-sky-400">Certificates</a>
         <a href="#projects" class="rounded-xl px-4 py-2 transition hover:bg-white/5 hover:text-sky-400">Projects</a>
         <a href="#research" class="rounded-xl px-4 py-2 transition hover:bg-white/5 hover:text-sky-400">Research</a>
         <!-- <a href="#publications" class="rounded-xl px-4 py-2 transition hover:bg-white/5 hover:text-sky-400">Publications</a> -->
@@ -348,6 +349,85 @@
 
     </div>
 </section>
+{{-- Certificates Section --}}
+<section id="certificates" class="relative z-10 pb-16 pt-2 lg:pb-20 lg:pt-4">
+
+    <div class="mx-auto max-w-7xl px-6">
+
+        <div class="mb-16 text-center">
+
+            <span class="rounded-full border border-sky-400/20 bg-sky-400/10 px-4 py-2 text-sm font-medium text-sky-300">
+                Professional Growth
+            </span>
+
+            <h2 class="mt-6 text-5xl font-bold text-white">
+                Certificates
+            </h2>
+
+            <p class="mx-auto mt-6 max-w-3xl text-xl text-slate-400">
+                Professional certifications, training programs and academic achievements.
+            </p>
+
+        </div>
+
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+
+            @foreach($certificates as $certificate)
+
+                <div class="glass-card overflow-hidden rounded-3xl">
+
+                    @if($certificate->image)
+                        <img
+                            src="{{ asset('storage/' . $certificate->image) }}"
+                            alt="{{ $certificate->title }}"
+                            class="h-56 w-full object-cover">
+                    @endif
+
+                    <div class="p-8">
+
+                        <h3 class="text-2xl font-bold text-white">
+                            {{ $certificate->title }}
+                        </h3>
+
+                        <p class="mt-3 text-sky-400">
+                            {{ $certificate->issuer }}
+                        </p>
+
+                        <p class="mt-2 text-slate-400">
+                            {{ $certificate->issue_date }}
+                        </p>
+
+                        <div class="mt-6 flex gap-3">
+
+                            @if($certificate->credential_url)
+                                <a href="{{ $certificate->credential_url }}"
+                                   target="_blank"
+                                   class="rounded-xl bg-sky-500 px-5 py-3 font-medium text-black">
+                                    Verify
+                                </a>
+                            @endif
+
+                            @if($certificate->certificate_file)
+                                <a href="{{ asset('storage/'.$certificate->certificate_file) }}"
+                                   target="_blank"
+                                   class="rounded-xl border border-slate-700 px-5 py-3 text-slate-300">
+                                    View PDF
+                                </a>
+                            @endif
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            @endforeach
+
+        </div>
+
+    </div>
+
+</section>
 {{-- Projects Section --}}
 <section id="projects" class="relative z-10 pb-16 pt-8 lg:pb-20 lg:pt-10">
     <div class="mx-auto max-w-7xl px-6">
@@ -620,15 +700,10 @@
 
                     <div class="overflow-hidden">
 
-                        <a href="{{ asset('storage/' . $gallery->image) }}"
-                            target="_blank">
-
-                            <img
-                                src="{{ asset('storage/' . $gallery->image) }}"
-                                alt="{{ $gallery->title }}"
-                                class="h-72 w-full object-cover transition duration-500 group-hover:scale-110">
-
-                        </a>
+                        <img
+                            src="{{ asset('storage/' . $gallery->image) }}"
+                            alt="{{ $gallery->title }}"
+                            class="gallery-image h-72 w-full cursor-pointer object-cover transition duration-500 group-hover:scale-110">                        
 
                     </div>
 
@@ -831,4 +906,55 @@
     </footer>
 </div>
 
+{{-- Gallery Lightbox --}}
+<div id="lightbox"
+     class="fixed inset-0 z-[9999] hidden items-center justify-center bg-black/90 px-6">
+
+    <button type="button"
+            id="lightbox-close"
+            class="absolute right-6 top-6 rounded-full border border-white/20 px-4 py-2 text-white hover:bg-white/10">
+        ✕
+    </button>
+
+    <img id="lightbox-img"
+         src=""
+         alt="Gallery Preview"
+         class="max-h-[90vh] max-w-[90vw] rounded-2xl object-contain">
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.getElementById('lightbox-close');
+
+        document.querySelectorAll('.gallery-image').forEach(function (img) {
+            img.addEventListener('click', function () {
+                lightbox.classList.remove('hidden');
+                lightbox.classList.add('flex');
+                lightboxImg.src = this.src;
+            });
+        });
+
+        function closeLightbox() {
+            lightbox.classList.add('hidden');
+            lightbox.classList.remove('flex');
+            lightboxImg.src = '';
+        }
+
+        closeBtn.addEventListener('click', closeLightbox);
+
+        lightbox.addEventListener('click', function (event) {
+            if (event.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    });
+</script>
 @endsection

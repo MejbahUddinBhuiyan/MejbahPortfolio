@@ -38,6 +38,11 @@
                 class="block rounded-lg px-4 py-2 hover:bg-slate-800">
                     Skills
                 </a>
+                <a href="{{ route('admin.certificates.index') }}"
+                   class="block rounded-lg px-4 py-2 hover:bg-slate-800
+                   {{ request()->routeIs('admin.certificates.*') ? 'bg-slate-800 text-sky-400' : '' }}">
+                    Certificates
+                </a>
 
                 <a href="{{ route('admin.projects.index') }}"
                    class="block rounded-lg px-4 py-2 hover:bg-slate-800
