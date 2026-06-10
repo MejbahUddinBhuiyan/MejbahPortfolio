@@ -291,7 +291,7 @@
     </div>
 </section>
 {{-- Skills Section --}}
-<section id="skills" class="relative z-10 pb-16 pt-2 lg:pb-20 lg:pt-4">
+<section id="skills" class="relative z-10 pb-16 pt-8 lg:pb-20 lg:pt-10">
     <div class="mx-auto max-w-7xl px-6">
 
         <div class="mb-12 text-center">
@@ -350,7 +350,7 @@
     </div>
 </section>
 {{-- Certificates Section --}}
-<section id="certificates" class="relative z-10 pb-16 pt-2 lg:pb-20 lg:pt-4">
+<section id="certificates" class="relative z-10 pb-16 pt-8 lg:pb-20 lg:pt-10">
 
     <div class="mx-auto max-w-7xl px-6">
 
@@ -600,7 +600,7 @@
     </div>
 </section>
 {{-- Blog Section --}}
-<section id="blog" class="relative z-10 pb-16 pt-2 lg:pb-20 lg:pt-4">
+<section id="blog" class="relative z-10 pb-16 pt-8 lg:pb-20 lg:pt-10">
     <div class="mx-auto max-w-7xl px-6">
 
         <div class="mb-12 text-center">
@@ -670,7 +670,7 @@
     </div>
 </section>
 {{-- Gallery Section --}}
-<section id="gallery" class="relative z-10 pt-6 pb-16 lg:pt-8 lg:pb-20">
+<section id="gallery"class="relative z-10 pb-16 pt-8 lg:pb-20 lg:pt-10">
 
     <div class="mx-auto max-w-7xl px-6">
 
@@ -743,7 +743,7 @@
 
 </section>
 <!-- Contact Section -->
-<section id="contact" class="relative z-10 pt-6 pb-16 lg:pt-8 lg:pb-20">
+<section id="contact" class="relative z-10 pb-16 pt-8 lg:pb-20 lg:pt-10">
     <div class="max-w-7xl mx-auto px-6">
 
         <div class="text-center mb-16">
@@ -862,7 +862,7 @@
 </section>
 {{-- Social Media Section --}}
 {{-- Social Media Section --}}
-<section id="social" class="relative z-10 pb-20 pt-4 lg:pt-6">
+<section id="social" class="relative z-10 pb-16 pt-8 lg:pb-20 lg:pt-10">
     <div class="mx-auto max-w-7xl px-6">
 
         <div class="mb-10 text-center">
